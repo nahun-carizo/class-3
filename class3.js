@@ -1,69 +1,68 @@
-class CPersona {
-    constructor(nombre, fechaNacimiento, dni, genero, peso, altura) {
-      this.nombre = nombre;
-      this.fechaNacimiento = fechaNacimiento;
-      this.dni = dni;
-      this.genero = this.comprobarGenero(genero);
-      this.peso = peso;
-      this.altura = altura;
+class CrearPersona {
+    constructor(Nombre, Fecha, DNI, Genero, Peso, Altura) {
+      this.Nombre = Nombre;
+      this.Fecha = Fecha;
+      this.DNI = DNI;
+      this.Genero = this.comprobar(Genero);
+      this.Peso = Peso;
+      this.Altura = Altura;
     }
   
-    calcularIMC() {
-      const imc = this.peso / (this.altura ** 2);
+    CalIMC() {
+      const IMC = this.Peso / (this.Altura ** 2);
   
-      if (imc < 20) {
+      if (IMC < 20) {
         return -1;
-      } else if (imc >= 20 && imc <= 25) {
+      } else if (IMC >= 20 && IMC <= 25) {
         return 0;
       } else {
         return 1;
       }
     }
   
-    esMayorDeEdad() {
-      const fechaActual = new Date();
-      const fechaNacimiento = new Date(this.fechaNacimiento);
-      const edad = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
+    MayorEdad() {
+      const FechaAct = new Date();
+      const fechaNacimiento = new Date(this.Fecha);
+      const Edad = FechaAct.getFullYear() - fechaNacimiento.getFullYear();
   
       return edad >= 18;
     }
   
-    comprobarGenero(genero) {
-      const generosValidos = ['H', 'M', 'O'];
+    CPGenero(Genero) {
+      const Validos = ['H', 'M', 'N'];
   
-      if (generosValidos.includes(genero)) {
-        return genero;
+      if (Validos.includes(Genero)) {
+        return Genero;
       } else {
         return 'H';
       }
     }
   }
   
-  const formulario = document.getElementById('formularioPersona');
+  const formulario = document.getElementById('formulario');
   
   formulario.addEventListener('submit', function(event) {
     event.preventDefault(); 
   
-    const nombre = document.getElementById('nombre').value;
-    const fechaNacimiento = document.getElementById('fechaNacimiento').value;
-    const dni = document.getElementById('dni').value;
-    const genero = document.getElementById('genero').value;
-    const peso = parseFloat(document.getElementById('peso').value);
-    const altura = parseFloat(document.getElementById('altura').value);
+    const Nombre = document.getElementById('Nombre').value;
+    const Fecha = document.getElementById('Fecha').value;
+    const DNI = document.getElementById('DNI').value;
+    const Genero = document.getElementById('Genero').value;
+    const Peso = parseFloat(document.getElementById('Peso').value);
+    const Altura = parseFloat(document.getElementById('Altura').value);
   
-    const persona = new CPersona(nombre, fechaNacimiento, dni, genero, peso, altura);
+    const Persona = new CrearPersona(Nombre, Fecha, DNI, Genero, Peso, Altura);
   
-    const imc = persona.calcularIMC();
+    const IMC = Persona.CalIMC();
   
-    const esMayorEdad = persona.esMayorDeEdad();
+    const esMayor = Persona.MayorEdad();
   
-    console.log('Nombre:', persona.nombre);
-    console.log('Fecha de Nacimiento:', persona.fechaNacimiento);
-    console.log('DNI:', persona.dni);
-    console.log('Género:', persona.genero);
-    console.log('Peso:', persona.peso);
-    console.log('Altura:', persona.altura);
-    console.log('IMC:', imc);
-    console.log('Es mayor de edad:', esMayorEdad);
+    console.log('Nombre:', Persona.Nombre);
+    console.log('DNI:', Persona.DNI);
+    console.log('Fecha de Nacimiento:', Persona.Fecha);
+    console.log('Género:', Persona.Genero);
+    console.log('Peso:', Persona.Peso);
+    console.log('Altura:', Persona.Altura);
+    console.log('IMC:', IMC);
+    console.log('Es mayor de edad:', MayorEdad);
   });
-//los this. siempre me dan problemas, me olvido que se llama de esa forma.
